@@ -1,19 +1,17 @@
 const express = require('express');
 const app = express();
+const PORT = process.env.PORT || 4000;
 
-// Route for the root path
+// Middleware to handle JSON requests
+app.use(express.json());
+
 app.get('/', (req, res) => {
-    res.send('Welcome to the IP Address Fetcher! Go to /get-ip to see your IP address.');
-});
-
-// Route to get the user's IP address
-app.get('/get-ip', (req, res) => {
+    // Get the user's IP address
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+
     res.send(`Your IP Address: ${ip}`);
 });
 
-const port = 3002; // You can keep this port or change it
-
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
