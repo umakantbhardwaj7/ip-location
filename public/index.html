@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Address Fetcher</title>
+    <script>
+        async function fetchIPAddress() {
+            try {
+                const response = await fetch('/get-ip'); // Call the server endpoint
+                const ip = await response.text();
+                document.getElementById('ip').innerText = `Your IP Address: ${ip}`;
+            } catch (error) {
+                console.error('Error fetching IP address:', error);
+            }
+        }
+
+        window.onload = fetchIPAddress;
+    </script>
+</head>
+<body>
+    <h1>IP Address Fetcher</h1>
+    <p id="ip">Fetching IP Address...</p>
+</body>
+</html>
